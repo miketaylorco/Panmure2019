@@ -1,0 +1,6 @@
+C:\My Websites\Panmure\Panmure 2019\Panmure.Core\bin\Debug\Panmure.Core.dll
+C:\My Websites\Panmure\Panmure 2019\Panmure.Core\bin\Debug\Panmure.Core.pdb
+C:\My Websites\Panmure\Panmure 2019\Panmure.Core\obj\Debug\Panmure.Core.csprojAssemblyReference.cache
+C:\My Websites\Panmure\Panmure 2019\Panmure.Core\obj\Debug\Panmure.Core.csproj.CoreCompileInputs.cache
+C:\My Websites\Panmure\Panmure 2019\Panmure.Core\obj\Debug\Panmure.Core.dll
+C:\My Websites\Panmure\Panmure 2019\Panmure.Core\obj\Debug\Panmure.Core.pdb

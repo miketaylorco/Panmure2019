@@ -1,0 +1,25 @@
+﻿{
+  "propertyEditors": [
+
+    {
+      "alias": "MT.Rates",
+      "name": "[MT] Rates",
+      "editor": {
+
+        "view": "~/App_Plugins/MT/Rates/rates.editor.html"
+
+      }
+    }
+
+  ],
+
+  "javascript": [
+
+    "~/App_Plugins/MT/Rates/rates.controller.js"
+
+  ],
+
+  "css": [
+    "~/App_Plugins/MT/Rates/rates.css"
+  ]
+}

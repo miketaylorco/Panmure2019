@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panmure.Web", "Panmure.Web\Panmure.Web.csproj", "{813EAD71-DCAB-4604-9C53-0C214FC5FC66}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7C37A62A-9BF5-4390-BB8A-74A3B2E4FE86} = {7C37A62A-9BF5-4390-BB8A-74A3B2E4FE86}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panmure.Core", "Panmure.Core\Panmure.Core.csproj", "{7C37A62A-9BF5-4390-BB8A-74A3B2E4FE86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{813EAD71-DCAB-4604-9C53-0C214FC5FC66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{813EAD71-DCAB-4604-9C53-0C214FC5FC66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{813EAD71-DCAB-4604-9C53-0C214FC5FC66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C37A62A-9BF5-4390-BB8A-74A3B2E4FE86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C37A62A-9BF5-4390-BB8A-74A3B2E4FE86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C37A62A-9BF5-4390-BB8A-74A3B2E4FE86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C37A62A-9BF5-4390-BB8A-74A3B2E4FE86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5A3E12E5-1FC0-4697-A266-9891977FBC05}
+	EndGlobalSection
+EndGlobal

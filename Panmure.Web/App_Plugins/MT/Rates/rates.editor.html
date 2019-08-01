@@ -1,0 +1,112 @@
+﻿<div ng-controller="MT.Rates.RatesController">
+
+    <p>Minimum guests </p>
+    <p><input ng-model="model.value.minGuests" type="number" min="1" /></p>
+
+    <p>Maximum guests </p>
+    <p><input ng-model="model.value.maxGuests" type="number" min="1" /></p>
+
+    <p>Edit rates for</p>
+    <p><select ng-model="showYear" ng-options="number for number in allYears"></select></p>
+
+
+    <!-- (filtered) list of rates -->
+    <div ng-repeat="rate in model.value.rates | startsInYear: showYear" class="clr-rates">
+
+        <hr />
+
+        <p>fromDate</p>
+        <p><umb-flatpickr data-index="{{ rate.index }}" options="dateOptions(rate.fromDate)"></umb-flatpickr></p>
+
+        
+
+        <table ng-if="model.value.minGuests > 0 && model.value.maxGuests >= model.value.minGuests" class="clr-table">
+            <thead>
+            <tr>
+                <td>&nbsp;</td>
+                <th ng-repeat="price in rate.prices" ng-show="$index >= model.value.minGuests && $index <= model.value.maxGuests">{{ $index }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>£</th>
+                <td ng-repeat="price in rate.prices" ng-show="$index >= model.value.minGuests && $index <= model.value.maxGuests"><input ng-model="price.ratePounds" type="number" min="0" /></td>
+            </tr>
+            <tr>
+                <th>€</th>
+                <td ng-repeat="price in rate.prices" ng-show="$index >= model.value.minGuests && $index <= model.value.maxGuests"><input ng-model="price.rateEuros" type="number" min="0" /></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <hr />
+
+    <p>&nbsp;</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- test -->
+    <!--
+        <p><umb-flatpickr id="pickerIdTest" data-model0="first[0]" data-model1="second[0]" data-model2="third" options="defaultDateTimeConfig" ng-model="model.value.testDate"></umb-flatpickr></p>
+
+        <table ng-if="model.value.minGuests > 0 && model.value.maxGuests >= model.value.minGuests" class="clr-table">
+            <thead>
+            <tr>
+                <th scope="col">Guests</th>
+                <th scope="col">Price (£)</th>
+                <th scope="col">Price (€)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="i in getNumber(model.value.maxGuests) track by $index" ng-show="$index >= model.value.minGuests && $index <= model.value.maxGuests">
+                <th scope="row">{{ $index }}</th>
+                <td><input type="number" class="clr-number"/></td>
+                <td><input type="number" class="clr-number"/></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+        <table ng-if="model.value.minGuests > 0 && model.value.maxGuests >= model.value.minGuests" class="clr-table">
+            <thead>
+            <tr>
+                <td>&nbsp;</td>
+                <th ng-repeat="i in getNumber(model.value.maxGuests) track by $index" ng-show="$index >= model.value.minGuests && $index <= model.value.maxGuests">{{ $index }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>£</th>
+                <td ng-repeat="i in getNumber(model.value.maxGuests) track by $index" ng-show="$index >= model.value.minGuests && $index <= model.value.maxGuests"><input type="number"/></td>
+            </tr>
+            <tr>
+                <th>€</th>
+                <td ng-repeat="i in getNumber(model.value.maxGuests) track by $index" ng-show="$index >= model.value.minGuests && $index <= model.value.maxGuests"><input type="number"/></td>
+            </tr>
+            </tbody>
+        </table>
+    -->
+
+
+    <p><pre><code>{{ model.value | json }}</code></pre></p>
+
+</div>
