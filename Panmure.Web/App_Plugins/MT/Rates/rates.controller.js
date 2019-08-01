@@ -161,8 +161,12 @@ app.controller("MT.Rates.RatesController",
 
                 calculateAllYears();
 
+            },
+            onReady: function() {
+                this.setDate(new Date(this.element.parentElement.parentElement.getAttribute('value')));
             }
         };
+
 
         $scope.dateOptions = function(dateStr) {
             return angular.extend({ defaultDate: new Date(dateStr) }, $scope.defaultDateTimeConfig);
