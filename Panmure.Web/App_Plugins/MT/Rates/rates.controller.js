@@ -168,9 +168,6 @@ app.controller("MT.Rates.RatesController",
         };
 
 
-        $scope.dateOptions = function(dateStr) {
-            return angular.extend({ defaultDate: new Date(dateStr) }, $scope.defaultDateTimeConfig);
-        };
 
 
 
