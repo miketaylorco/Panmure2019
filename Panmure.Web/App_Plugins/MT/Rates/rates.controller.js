@@ -105,7 +105,6 @@ app.controller("MT.Rates.RatesController",
 
         function calculateAllYears() {
             // need to get all distinct years from rates to populate dropdown
-            // these will be in order because of the above sort
             $scope.allYears = [];
             for (var x = 0; x < $scope.model.value.rates.length; x++) {
                 var thisYear = new Date($scope.model.value.rates[x].fromDate).getFullYear();
