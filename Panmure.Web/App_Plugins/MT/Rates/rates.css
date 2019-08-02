@@ -1,3 +1,177 @@
-﻿.rates {
+﻿.rates-group {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 20px;
+    padding-left: 8px;
+}
+
+.rates-occupancy {
+    float: left;
+    margin-right: 20px;
+    width: 83px;
+}
+
+.rates-occupancy label,
+.rates-year label {
+    display: block;
+    padding-bottom: 4px;
+}
+
+.rates-occupancy input{
+    width: 100%;
+}
+
+.rates-year {
+    padding-left: 8px;
+    padding-bottom: 20px;
+}
+
+.rates-year select {
+    width: 121px;
+}
+
+
+
+
+
+.rates-rows table tbody {
+    background-color: #F6F4F4;
+}
+
+.rates-rows-add table tbody {
+    background-color: #fff;
+}
+    
+.rates-rows table tbody {
+    margin-top: 30px;
+    border-top: 5px solid #fff;
+}
+
+.rates-datepicker,
+.rates-rows input.flatpickr-input[readonly] {
+    background-color: #fff !important;
+    width: 170px;
+}
+
+
+.rates-rows table th,
+.rates-rows table td {
+    padding-top: 8px;
+    padding-left: 8px;
+}
+
+.rates-rows table tbody {
+    color: #817F85;
+
+}
+
+.rates-rows table tbody tr:last-child td {
+    padding-bottom: 8px;
+}
+
+.rates-rows table tbody tr:first-child td:last-child {
+    padding-right: 8px;
+}
+
+
+.rates-rows table thead th {
+    font-weight: normal;
+    padding-bottom: 8px;
+}
+
+.rates-rows table thead th:first-child {
+    text-align: left;
+}
+
+.rates-rows table tbody td[rowspan] {
+    vertical-align: top;
+}
+
+.rates-rows input.rates-price {
+    width: 53px;
+}
+
+
+.rates-minnights {
+    width: 75px;
+}
+
+.rates-delete {
+    display: block;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    color: #817F85;
+}
+
+.rates-delete:hover {
+    text-decoration: none;
+}
+
+.rates-delete i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -7px;
+    margin-top: -7px;
+}
+
+
+
+
+
+/*
+
+.rates-rows {
+    background-color: #fea;
+}
+
+.rates-rows table {
+    background-color: #F6F4F4;
+    padding-bottom: 8px;
+    padding-right: 8px;
+}
+
+.rates-rows table thead {
+    display: none;
+}
+        
+.rates-rows table:first-child thead {
     display: block;
 }
+
+.rates-rows table thead th,
+.rates-rows table thead td,
+.rates-rows table tbody th,
+.rates-rows table tbody td {
+    padding-top: 8px;
+    padding-left: 8px;
+    text-align: left;
+}
+
+.rates-rows tbody tr:nth-child(odd) td {
+    border-top: solid 5px red;
+}
+
+.rates-rows table tbody tr:last-child td {
+    background-color: #fc0;
+    padding-bottom: 8px;
+}
+
+.rates-rows table tbody tr:first-child td:last-child {
+    background-color: #fc0;
+    padding-right: 8px;
+}
+
+.rates-rows table tbody td[rowspan] {
+    vertical-align: top;
+}
+
+
+.rates-datepicker,
+.rates input.flatpickr-input[readonly] {
+    background-color: #fff !important;
+}
+
+
+    */

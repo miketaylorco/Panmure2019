@@ -13,13 +13,29 @@ app.filter("startsInYear", function () {
                 filtered[j++].index = i;
             }
         }
+
+        // sort filtered by from date?
+        filtered.sort(function (a, b) {
+            var dateA = new Date(a.fromDate), dateB = new Date(b.fromDate);
+            return dateA - dateB;
+        });
+
         return filtered;
     };
 });
 
 
 app.controller("MT.Rates.RatesController",
-    function($scope) {
+    function($scope, notificationsService) {
+
+
+        // default settings for new nodes
+        var defaultData = {
+            minGuests: 2,
+            maxGuests: 4,
+            rates: []
+        };
+
 
 
         // seed some test data for now
@@ -94,13 +110,13 @@ app.controller("MT.Rates.RatesController",
         // https://our.umbraco.com/forum/umbraco-8/96478-custom-property-editor-with-valuetype-json
         var initModelValue = $scope.$watch('model.value', function (model) {
             if (typeof model === 'string' && model.length == 0)
-                $scope.model.value = dummyData;
+                $scope.model.value = defaultData;
             initModelValue(); //Deregisters the watch so we wont waste resources
         });
 
 
         // force the dummy data for now, for test purposes
-        $scope.model.value = dummyData;
+        // $scope.model.value = dummyData;
 
 
         function calculateAllYears() {
@@ -142,6 +158,7 @@ app.controller("MT.Rates.RatesController",
 
 
 
+        // date picker options for existing rows
 
         $scope.defaultDateTimeConfig = {
             weekNumbers: true,
@@ -155,14 +172,16 @@ app.controller("MT.Rates.RatesController",
 
                 // set current year to this one
                 var thisYear = new Date(dateStr).getFullYear();
-                if (thisYear != $scope.showYear) {
+                if (thisYear !== $scope.showYear) {
                     $scope.showYear = thisYear;
                 }
 
                 calculateAllYears();
 
             },
-            onReady: function() {
+            onReady: function () {
+                console.log("setting date...");
+                console.log(this);
                 this.setDate(new Date(this.element.parentElement.parentElement.getAttribute('value')));
             }
         };
@@ -170,13 +189,8 @@ app.controller("MT.Rates.RatesController",
 
 
 
+        // check for changes in sleepsTo to pad objects ready to store values
 
-
-
-
-
-
-        // check for changes in sleepsTo
         $scope.$watch("model.value.maxGuests",
             function (newValue, oldValue, scope) {
                 for (var i = 0; i < $scope.model.value.rates.length; i++) {
@@ -215,6 +229,109 @@ app.controller("MT.Rates.RatesController",
 
         $scope.getNumber = function (num) {
             return new Array(num + 1);
+        };
+
+
+
+
+
+
+        // adding a new row
+        $scope.newMinNights = 1;
+        $scope.newPounds = [];
+        $scope.newEuros = [];
+
+
+        $scope.newDateTimeConfig = {
+            weekNumbers: true,
+            altInput: true,
+            altFormat: "F j, Y",
+            altInputClass: "rates-datepicker",
+            dateFormat: "Y-m-d",
+            onChange: function (selectedDates, dateStr, instance) {
+                $scope.newFromDate = dateStr;
+            }
+        };
+
+
+        $scope.addRates = function () {
+
+            if ($scope.newFromDate) {
+
+                var newRow = {};
+
+                newRow.fromDate = $scope.newFromDate;
+                newRow.minNights = $scope.newMinNights;
+                newRow.prices = [];
+
+
+                for (var i=0; i <= $scope.model.value.maxGuests; i++) {
+
+                    var newPrices = {};
+                    newPrices.ratePounds = $scope.newPounds[i];
+                    newPrices.rateEuros = $scope.newEuros[i];
+
+                    newRow.prices.push(newPrices);
+
+                    // clear the form as you go
+                    $scope.newPounds[i] = null;
+                    $scope.newEuros[i] = null;
+                }
+
+                $scope.model.value.rates.push(newRow);
+
+
+                // set current year to this one
+                var thisYear = new Date($scope.newFromDate).getFullYear();
+                if (thisYear !== $scope.showYear) {
+                    $scope.showYear = thisYear;
+                }
+
+                calculateAllYears();
+
+
+                // leave the date picker with the date in it
+                // to make it easier to add the date in the next new row (which should be near-ish to the one just added)
+                // plus, not sure how to clear the picker from here anyway ;-)
+
+
+                // success notification
+                // maybe a bit too in-your-face?
+                // notificationsService.success('Rates added', "New rates added to the list successfully - don't forget to save and publish!");
+
+
+            } else {
+
+                // use notification service to show an error
+                notificationsService.warning('No date selected', 'You must select a starting date before adding the rates.');
+
+            }
+
+        };
+
+
+
+
+
+        // removing a row
+
+        $scope.removeRates = function (rate) {
+
+            if (confirm("Are you sure you want to remove this row?")) {
+
+                var thisYear = new Date(rate.fromDate).getFullYear();
+
+                $scope.model.value.rates.splice($scope.model.value.rates.indexOf(rate), 1);
+
+                calculateAllYears();
+
+                // if the current year is no longer in the list, show the latest year
+                if (($scope.allYears.length > 0) && ($scope.allYears.indexOf(thisYear) === -1)) {
+                    $scope.showYear = $scope.allYears[$scope.allYears.length - 1];
+                }
+
+            }
+
         };
 
 
