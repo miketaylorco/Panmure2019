@@ -9,17 +9,43 @@
         "view": "~/App_Plugins/MT/Rates/rates.editor.html"
 
       }
+    },
+
+    {
+      "alias": "MT.Availability",
+      "name": "[MT] Availability",
+      "editor": {
+
+        "view": "~/App_Plugins/MT/Availability/availability.editor.html"
+
+      },
+      "prevalues": {
+        "fields": [
+          {
+            "label": "Statuses",
+            "description": "Define possible availability statuses",
+            "key": "statuses",
+            "view": "~/App_Plugins/MT/Availability/prevalues/availability.status.editor.html"
+          }
+        ]
+      }
+      
     }
+
 
   ],
 
   "javascript": [
 
-    "~/App_Plugins/MT/Rates/rates.controller.js"
+    "~/App_Plugins/MT/Rates/rates.controller.js",
+    "~/App_Plugins/MT/Availability/availability.controller.js",
+    "~/App_Plugins/MT/Availability/prevalues/availability.status.controller.js"
 
   ],
 
   "css": [
-    "~/App_Plugins/MT/Rates/rates.css"
+    "~/App_Plugins/MT/Rates/rates.css",
+    "~/App_Plugins/MT/Availability/availability.css",
+    "~/App_Plugins/MT/Availability/prevalues/availability.status.css"
   ]
 }

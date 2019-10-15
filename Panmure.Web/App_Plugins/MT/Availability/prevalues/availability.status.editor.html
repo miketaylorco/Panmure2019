@@ -1,0 +1,43 @@
+﻿<div class="umb-property-editor umb-prevalues-multivalues" ng-controller="MT.Availability.PrevalueEditors.StatusController">
+    
+
+    <div class="control-group  umb-prevalues-multivalues__add color-picker-preval">
+        <div class="umb-prevalues-multivalues__left">
+            <input name="newLabel" type="text" ng-model="newLabel" focus-when="{{focusOnNew}}" class="umb-property-editor color-label" placeholder="Status" ng-show="labelEnabled" />
+            <input name="newId" type="number" ng-model="newId" class="umb-property-editor availability-id-label" placeholder="ID" />
+            <input name="newColor" type="hidden" />
+            <label for="newColor" val-highlight="{{hasError}}">#{{newColor}}</label>
+        </div>
+        <div class="umb-prevalues-multivalues__right">
+            <button class="btn btn-info add" ng-click="add($event)">Add</button>
+        </div>
+    </div>
+
+    <div ui-sortable="sortableOptions" ng-model="model.value">
+        <div class="control-group umb-prevalues-multivalues__listitem color-picker-preval" ng-repeat="item in model.value.statuses track by $id(item)">
+            <i class="icon icon-navigation handle"></i>
+            <div class="umb-prevalues-multivalues__left">
+                <input type="text" ng-if="labelEnabled" ng-model="item.label" val-server="item_{{$index}}" required />
+                <div class="thumbnail span1" hex-bg-color="{{item.value}}" hex-bg-orig="transparent"></div>
+                <div class="color-picker-prediv">
+                    #<input type="text" ng-model="item.value" />
+                    <input type="text" ng-model="item.id" />
+                    <span ng-bind="item.label" ng-if="!labelEnabled"></span>
+                </div>
+            </div>
+            <div class="umb-prevalues-multivalues__right">
+                <a class="umb-node-preview__action umb-node-preview__action--red" ng-click="remove(item, $event)">Remove</a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <hr />
+    <p>Default status</p>
+    <p>((( drop down )))</p>
+    
+    
+    
+    <pre><code>{{ model.value | json }}</code></pre>    
+
+</div>

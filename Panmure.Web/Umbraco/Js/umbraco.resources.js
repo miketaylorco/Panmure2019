@@ -1411,7 +1411,7 @@
             getCount: function getCount() {
                 return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('contentTypeApiBaseUrl', 'GetCount')), 'Failed to retrieve count');
             },
-            getAvailableCompositeContentTypes: function getAvailableCompositeContentTypes(contentTypeId, filterContentTypes, filterPropertyTypes) {
+            getAvailableCompositeContentTypes: function getAvailableCompositeContentTypes(contentTypeId, filterContentTypes, filterPropertyTypes, isElement) {
                 if (!filterContentTypes) {
                     filterContentTypes = [];
                 }
@@ -1421,7 +1421,8 @@
                 var query = {
                     contentTypeId: contentTypeId,
                     filterContentTypes: filterContentTypes,
-                    filterPropertyTypes: filterPropertyTypes
+                    filterPropertyTypes: filterPropertyTypes,
+                    isElement: isElement
                 };
                 return umbRequestHelper.resourcePromise($http.post(umbRequestHelper.getApiUrl('contentTypeApiBaseUrl', 'GetAvailableCompositeContentTypes'), query), 'Failed to retrieve data for content type id ' + contentTypeId);
             },
@@ -2266,16 +2267,21 @@
      *
      * @param {Int} id Id of node to return the public url to
      * @param {string} type Object type name
+     * @param {string} culture Culture
      * @returns {Promise} resourcePromise object containing the url.
      *
      */
-            getUrl: function getUrl(id, type) {
+            getUrl: function getUrl(id, type, culture) {
                 if (id === -1 || id === '-1') {
                     return '';
                 }
+                if (!culture) {
+                    culture = '';
+                }
                 return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('entityApiBaseUrl', 'GetUrl', [
                     { id: id },
-                    { type: type }
+                    { type: type },
+                    { culture: culture }
                 ])), 'Failed to retrieve url for id:' + id);
             },
             /**
@@ -2289,7 +2295,7 @@
      * ##usage
      * <pre>
      * //get media by id
-     * entityResource.getEntityById(0, "Media")
+     * entityResource.getById(0, "Media")
      *    .then(function(ent) {
      *        var myDoc = ent;
      *        alert('its here!');
@@ -2314,7 +2320,7 @@
                 if (id === -1 || id === '-1') {
                     return null;
                 }
-                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('entityApiBaseUrl', 'GetUrlAndAnchors', { id: id })), 'Failed to retrieve url and anchors data for id ' + id);
+                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('entityApiBaseUrl', 'GetUrlAndAnchors', [{ id: id }])), 'Failed to retrieve url and anchors data for id ' + id);
             },
             getAnchors: function getAnchors(rteContent) {
                 if (!rteContent || rteContent.length === 0) {
@@ -2333,7 +2339,7 @@
      * ##usage
      * <pre>
      * //Get templates for ids
-     * entityResource.getEntitiesByIds( [1234,2526,28262], "Template")
+     * entityResource.getByIds( [1234,2526,28262], "Template")
      *    .then(function(templateArray) {
      *        var myDoc = contentArray;
      *        alert('they are here!');
@@ -2494,7 +2500,8 @@
                     pageNumber: 100,
                     filter: '',
                     orderDirection: 'Ascending',
-                    orderBy: 'SortOrder'
+                    orderBy: 'SortOrder',
+                    dataTypeKey: null
                 };
                 if (options === undefined) {
                     options = {};
@@ -2994,31 +3001,43 @@
  *
  **/
     function logViewerResource($q, $http, umbRequestHelper) {
+        /**
+   * verb => 'get', 'post',
+   * method => API method to call
+   * params => additional data to send
+   * error => error message when things go wrong...
+   */
+        var request = function request(verb, method, params, error) {
+            return umbRequestHelper.resourcePromise(verb === 'GET' ? $http.get(umbRequestHelper.getApiUrl('logViewerApiBaseUrl', method) + (params ? params : '')) : $http.post(umbRequestHelper.getApiUrl('logViewerApiBaseUrl', method), params), error);
+        };
         //the factory object returned
         return {
             getNumberOfErrors: function getNumberOfErrors(startDate, endDate) {
-                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('logViewerApiBaseUrl', 'GetNumberOfErrors') + '?startDate=' + startDate + '&endDate=' + endDate), 'Failed to retrieve number of errors in logs');
+                return request('GET', 'GetNumberOfErrors', '?startDate=' + startDate + '&endDate=' + endDate, 'Failed to retrieve number of errors in logs');
+            },
+            getLogLevel: function getLogLevel() {
+                return request('GET', 'GetLogLevel', null, 'Failed to retrieve log level');
             },
             getLogLevelCounts: function getLogLevelCounts(startDate, endDate) {
-                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('logViewerApiBaseUrl', 'GetLogLevelCounts') + '?startDate=' + startDate + '&endDate=' + endDate), 'Failed to retrieve log level counts');
+                return request('GET', 'GetLogLevelCounts', '?startDate=' + startDate + '&endDate=' + endDate, 'Failed to retrieve log level counts');
             },
             getMessageTemplates: function getMessageTemplates(startDate, endDate) {
-                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('logViewerApiBaseUrl', 'GetMessageTemplates') + '?startDate=' + startDate + '&endDate=' + endDate), 'Failed to retrieve log templates');
+                return request('GET', 'GetMessageTemplates', '?startDate=' + startDate + '&endDate=' + endDate, 'Failed to retrieve log templates');
             },
             getSavedSearches: function getSavedSearches() {
-                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('logViewerApiBaseUrl', 'GetSavedSearches')), 'Failed to retrieve saved searches');
+                return request('GET', 'GetSavedSearches', null, 'Failed to retrieve saved searches');
             },
             postSavedSearch: function postSavedSearch(name, query) {
-                return umbRequestHelper.resourcePromise($http.post(umbRequestHelper.getApiUrl('logViewerApiBaseUrl', 'PostSavedSearch'), {
+                return request('POST', 'PostSavedSearch', {
                     'name': name,
                     'query': query
-                }), 'Failed to add new saved search');
+                }, 'Failed to add new saved search');
             },
             deleteSavedSearch: function deleteSavedSearch(name, query) {
-                return umbRequestHelper.resourcePromise($http.post(umbRequestHelper.getApiUrl('logViewerApiBaseUrl', 'DeleteSavedSearch'), {
+                return request('POST', 'DeleteSavedSearch', {
                     'name': name,
                     'query': query
-                }), 'Failed to delete saved search');
+                }, 'Failed to delete saved search');
             },
             getLogs: function getLogs(options) {
                 var defaults = {
@@ -3037,7 +3056,7 @@
                 return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('logViewerApiBaseUrl', 'GetLogs', options)), 'Failed to retrieve common log messages');
             },
             canViewLogs: function canViewLogs(startDate, endDate) {
-                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('logViewerApiBaseUrl', 'GetCanViewLogs') + '?startDate=' + startDate + '&endDate=' + endDate), 'Failed to retrieve state if logs can be viewed');
+                return request('GET', 'GetCanViewLogs', '?startDate=' + startDate + '&endDate=' + endDate, 'Failed to retrieve state if logs can be viewed');
             }
         };
     }

@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "ddf0ab2f47cacce8")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.5")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "1ba94e6bd9777143")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
 // FILE: models.generated.cs
@@ -290,6 +290,13 @@ namespace Umbraco.Web.PublishedModels
 		// properties
 
 		///<summary>
+		/// Availability: Set the availability of this accommodation.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("availability")]
+		public object Availability => RatesAndAvailability.GetAvailability(this);
+
+		///<summary>
 		/// Rates: Define the capacity and pricing for this accommodation.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
@@ -349,6 +356,13 @@ namespace Umbraco.Web.PublishedModels
 		// properties
 
 		///<summary>
+		/// Availability: Set the availability of this accommodation.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("availability")]
+		public object Availability => RatesAndAvailability.GetAvailability(this);
+
+		///<summary>
 		/// Rates: Define the capacity and pricing for this accommodation.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
@@ -360,6 +374,10 @@ namespace Umbraco.Web.PublishedModels
 	/// <summary>Rates and availability</summary>
 	public partial interface IRatesAndAvailability : IPublishedContent
 	{
+		/// <summary>Availability</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		object Availability { get; }
+
 		/// <summary>Rates</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		object Rates { get; }
@@ -389,6 +407,17 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
+
+		///<summary>
+		/// Availability: Set the availability of this accommodation.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("availability")]
+		public object Availability => GetAvailability(this);
+
+		/// <summary>Static getter for Availability</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static object GetAvailability(IRatesAndAvailability that) => that.Value("availability");
 
 		///<summary>
 		/// Rates: Define the capacity and pricing for this accommodation.

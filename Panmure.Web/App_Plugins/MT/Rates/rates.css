@@ -1,4 +1,6 @@
-﻿.rates-group {
+﻿
+
+.rates-group {
     display: block;
     overflow: hidden;
     margin-bottom: 20px;
@@ -88,7 +90,7 @@
 }
 
 .rates-rows input.rates-price {
-    width: 53px;
+    width: 60px;
 }
 
 
@@ -120,58 +122,3 @@
 
 
 
-/*
-
-.rates-rows {
-    background-color: #fea;
-}
-
-.rates-rows table {
-    background-color: #F6F4F4;
-    padding-bottom: 8px;
-    padding-right: 8px;
-}
-
-.rates-rows table thead {
-    display: none;
-}
-        
-.rates-rows table:first-child thead {
-    display: block;
-}
-
-.rates-rows table thead th,
-.rates-rows table thead td,
-.rates-rows table tbody th,
-.rates-rows table tbody td {
-    padding-top: 8px;
-    padding-left: 8px;
-    text-align: left;
-}
-
-.rates-rows tbody tr:nth-child(odd) td {
-    border-top: solid 5px red;
-}
-
-.rates-rows table tbody tr:last-child td {
-    background-color: #fc0;
-    padding-bottom: 8px;
-}
-
-.rates-rows table tbody tr:first-child td:last-child {
-    background-color: #fc0;
-    padding-right: 8px;
-}
-
-.rates-rows table tbody td[rowspan] {
-    vertical-align: top;
-}
-
-
-.rates-datepicker,
-.rates input.flatpickr-input[readonly] {
-    background-color: #fff !important;
-}
-
-
-    */

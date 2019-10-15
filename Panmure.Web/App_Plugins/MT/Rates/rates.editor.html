@@ -43,7 +43,9 @@
                     <td rowspan="2"><input ng-model="rate.minNights" type="number" min="1" class="rates-minnights" /></td>
                     <td>£</td>
                     <td ng-if="model.value.minGuests > 0 && model.value.maxGuests >= model.value.minGuests" ng-repeat="price in rate.prices" ng-show="$index >= model.value.minGuests && $index <= model.value.maxGuests"><input ng-model="price.ratePounds" type="number" min="0" class="rates-price" /></td>
-                    <td rowspan="2"><a data-ng-click="removeRates(rate)" class="rates-delete"><i class="icon-trash"></i></a></td>
+                    <td rowspan="2">
+                        <a ng-click="removeRates(rate)" class="rates-delete" title="Delete this row?" style="position: relative;"><i class="icon-trash"></i></a>
+                    </td>
                 </tr>
                 <tr>
                     <td>€</td>

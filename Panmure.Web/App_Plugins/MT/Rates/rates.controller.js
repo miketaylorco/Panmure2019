@@ -180,8 +180,6 @@ app.controller("MT.Rates.RatesController",
 
             },
             onReady: function () {
-                console.log("setting date...");
-                console.log(this);
                 this.setDate(new Date(this.element.parentElement.parentElement.getAttribute('value')));
             }
         };
@@ -317,7 +315,7 @@ app.controller("MT.Rates.RatesController",
 
         $scope.removeRates = function (rate) {
 
-            if (confirm("Are you sure you want to remove this row?")) {
+            if (confirm('Are you sure you want to delete this row?')) {
 
                 var thisYear = new Date(rate.fromDate).getFullYear();
 
@@ -329,7 +327,6 @@ app.controller("MT.Rates.RatesController",
                 if (($scope.allYears.length > 0) && ($scope.allYears.indexOf(thisYear) === -1)) {
                     $scope.showYear = $scope.allYears[$scope.allYears.length - 1];
                 }
-
             }
 
         };
